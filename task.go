@@ -63,7 +63,7 @@ func main() {
 	sc := bufio.NewScanner(os.Stdin)
 	for sc.Scan() {
 		txt := sc.Text()
-		put(string(txt), studStorage)
+		put(txt, studStorage)
 	}
 	get(studStorage)
 }
