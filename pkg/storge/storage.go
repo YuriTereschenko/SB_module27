@@ -1,41 +1,28 @@
 package storge
 
 import (
-	"fmt"
 	"learning/module27/pkg/student"
-	"strconv"
 	"strings"
 )
 
-func NewStorage() map[string]student.Student {
-	return make(map[string]student.Student)
+type MemStorage struct {
+	students map[string]student.Student
 }
 
-func Get(storage map[string]student.Student) {
-	fmt.Println("Студенты из хранилища:")
-	for _, value := range storage {
-		fmt.Println(value.GetInfo())
+func NewStorage() *MemStorage {
+	return &MemStorage{
+		students: make(map[string]student.Student),
 	}
 }
 
-func Put(data string, storage map[string]student.Student) {
-	dataSplited := strings.Split(data, " ")
-	if len(dataSplited) != 3 {
-		fmt.Println("Incorrect input")
-		return
+func (ms *MemStorage) Get() string {
+	result := "Список студетов:"
+	for _, val := range ms.students {
+		result = strings.Join([]string{result, val.GetInfoStr()}, "\n")
 	}
-	name := dataSplited[0]
-	age, err := strconv.Atoi(dataSplited[1])
-	if err != nil {
-		fmt.Println("Incorrect input", err)
-		return
-	}
-	grade, err := strconv.Atoi(dataSplited[2])
-	if err != nil {
-		fmt.Println("Incorrect input", err)
-		return
-	}
+	return result
+}
 
-	storage[name] = student.NewStudent(name, age, grade)
-
+func (ms *MemStorage) Put(name string, age, grade int) {
+	ms.students[name] = student.NewStudent(name, age, grade)
 }

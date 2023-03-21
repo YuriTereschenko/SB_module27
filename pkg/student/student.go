@@ -1,5 +1,7 @@
 package student
 
+import "fmt"
+
 type Student struct {
 	name string
 
@@ -16,6 +18,6 @@ func NewStudent(name string, age, grade int) Student {
 	}
 }
 
-func (s Student) GetInfo() (string, int, int) {
-	return s.name, s.age, s.grade
+func (s Student) GetInfoStr() string {
+	return fmt.Sprintf("%v %v %v", s.name, s.age, s.grade)
 }
