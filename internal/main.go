@@ -10,11 +10,6 @@ import (
 	"strings"
 )
 
-type Storage interface {
-	Put(string, int, int)
-	Get() string
-}
-
 func convertData(data string) (bool, student.Student) {
 	dataSplited := strings.Split(data, " ")
 	if len(dataSplited) != 3 {
