@@ -2,7 +2,6 @@ package storge
 
 import (
 	"learning/module27/pkg/student"
-	"strings"
 )
 
 type MemStorage struct {
@@ -15,14 +14,11 @@ func NewStorage() *MemStorage {
 	}
 }
 
-func (ms *MemStorage) Get() string {
-	result := "Список студетов:"
-	for _, val := range ms.students {
-		result = strings.Join([]string{result, val.GetInfoStr()}, "\n")
-	}
-	return result
+func (ms *MemStorage) Get() map[string]student.Student {
+
+	return ms.students
 }
 
-func (ms *MemStorage) Put(name string, age, grade int) {
-	ms.students[name] = student.NewStudent(name, age, grade)
+func (ms *MemStorage) Put(st student.Student) {
+	ms.students[st.Name] = st
 }
